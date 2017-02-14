@@ -1,0 +1,103 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de Locais"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{localMB.local.id}" />
+						<p:columnGroup>
+						</p:columnGroup>
+						
+						<h:outputText value="Nome:* " />
+						<p:inputText value="#{localMB.local.nome}"
+							required="true" converter="toUpperCaseConverter"
+							requiredMessage="O campo Local é obrigatório!" size="25"
+							maxlength="255"  id="nome">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+												
+						<h:outputText value="Unidade:* " />
+						<p:selectOneMenu id="unidade" value="#{localMB.local.unidade}"
+							required="true" requiredMessage="O campo Unidade é obrigatório!"
+							converter="unidadeConverter" style="width:15.5em" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{unidadeMB.allUnidades}" var="unidade"
+								itemLabel="#{unidade.sigla}" itemValue="#{unidade}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="IP:* " />
+						<p:inputText value="#{localMB.local.ip}"
+							required="true"
+							requiredMessage="O campo IP é obrigatório!" size="25"
+							maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+							
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{localMB.updateLocal}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="listarLocais.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+			
+			<script type="text/javascript">
+				PrimeFaces.locales['pt'] = {
+					closeText : 'Fechar',
+					prevText : 'Anterior',
+					nextText : 'Próximo',
+					currentText : 'Começo',
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+					weekHeader : 'Semana',
+					firstDay : 1,
+					isRTL : false,
+					showMonthAfterYear : false,
+					yearSuffix : '',
+					timeOnlyTitle : 'Só Horas',
+					timeText : 'Tempo',
+					hourText : 'Hora',
+					minuteText : 'Minuto',
+					secondText : 'Segundo',
+					currentText : 'Data Atual',
+					ampm : false,
+					month : 'Mês',
+					week : 'Semana',
+					day : 'Dia',
+					allDayText : 'Todo Dia'
+				};
+			</script>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

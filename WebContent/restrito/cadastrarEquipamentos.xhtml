@@ -1,0 +1,143 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de Equipamentos"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{equipamentoMB.equipamento.id}" />
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="Tipo:* " />
+						<p:selectOneMenu id="tipo" value="#{equipamentoMB.equipamento.tipo}"
+							required="true" requiredMessage="O campo Tipo é obrigatório!"
+							converter="tipoConverter" style="width:15.5em" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{tipoMB.allTipos}" var="tipo"
+								itemLabel="#{tipo.tipo}" itemValue="#{tipo}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Patrimônio:* " />
+						<p:inputText value="#{equipamentoMB.equipamento.patrimonio}"
+							required="true" converterMessage="Utilize somente números no campo Patrimônio!"
+							requiredMessage="O campo Patrimônio é obrigatório!" size="25"
+							maxlength="255"  id="patrimonio">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+												
+						<h:outputText value="Número de série: " />
+						<p:inputText value="#{equipamentoMB.equipamento.serie}"
+							required="false"
+							requiredMessage="O campo Número de Série é obrigatório!" size="25"
+							maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+						
+						<h:outputText value="Marca: " />
+						<p:inputText value="#{equipamentoMB.equipamento.marca}"
+							required="false"
+							requiredMessage="O campo Marca é obrigatório!" size="50"
+							maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+						
+						<h:outputText value="Modelo: " />
+						<p:inputText value="#{equipamentoMB.equipamento.modelo}"
+							required="false"
+							requiredMessage="O campo Modelo é obrigatório!" size="50"
+							maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+						
+						<h:outputText value="Fornecedor:* " />
+						<p:selectOneMenu id="fornecedor" value="#{equipamentoMB.equipamento.fornecedor}"
+							required="true" requiredMessage="O campo Fornecedor é obrigatório!"
+							converter="fornecedorConverter" style="width:15.5em" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{fornecedorMB.allFornecedores}" var="fornecedor"
+								itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor}" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Data de compra:* " />
+						<p:calendar id="dataDeCompra" pattern="dd/MM/yyyy" locale="pt"
+							value="#{equipamentoMB.equipamento.dataDeCompra}" disabled="false" required="true"
+							requiredMessage="O campo data de compra é de preenchimento obrigatório" navigator="true">
+							<p:ajax event="dateSelect" update="dataFinalDaGarantia" />
+						</p:calendar>
+							
+						<h:outputText value="Data final da garantia:* " />
+						<p:calendar id="dataFinalDaGarantia" pattern="dd/MM/yyyy" locale="pt"
+							value="#{equipamentoMB.equipamento.dataFinalDaGarantia}" disabled="false" required="true" 
+							requiredMessage="O campo data final da garantia é de preenchimento obrigatório" navigator="true"
+							mindate="#{equipamentoMB.equipamento.dataDeCompra}"/>
+							
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{equipamentoMB.updateEquipamento}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="listarEquipamentos.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+			
+			<script type="text/javascript">
+				PrimeFaces.locales['pt'] = {
+					closeText : 'Fechar',
+					prevText : 'Anterior',
+					nextText : 'Próximo',
+					currentText : 'Começo',
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+					weekHeader : 'Semana',
+					firstDay : 1,
+					isRTL : false,
+					showMonthAfterYear : false,
+					yearSuffix : '',
+					timeOnlyTitle : 'Só Horas',
+					timeText : 'Tempo',
+					hourText : 'Hora',
+					minuteText : 'Minuto',
+					secondText : 'Segundo',
+					currentText : 'Data Atual',
+					ampm : false,
+					month : 'Mês',
+					week : 'Semana',
+					day : 'Dia',
+					allDayText : 'Todo Dia'
+				};
+			</script>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

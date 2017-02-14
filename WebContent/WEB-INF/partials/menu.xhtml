@@ -1,0 +1,49 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:loadBundle basename="messages" var="msg" />
+	<h:form>
+		<p:growl id="messages" />
+
+		<img src="images/logo.png" width="250px" border="0" />
+		
+		<p:menubar>
+			<p:menuitem value="#{msg.inicio}" outcome="home.xhtml"
+				icon="ui-icon-home" />
+
+			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk">
+				<p:menuitem value="#{msg.laudos}" outcome="listarLaudos.xhtml"
+					icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.videoconferencia}" outcome="listarVideo.xhtml"
+					icon="ui-icon-stop"/>
+				<p:separator />
+				<p:menuitem value="#{msg.unidades}" outcome="listarUnidades.xhtml"
+					icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.locais}" outcome="listarLocais.xhtml"
+					icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.setores}"
+					outcome="listarSetores.xhtml" icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.fornecedores}"
+					outcome="listarFornecedores.xhtml" icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.tipos}"
+					outcome="listarTipos.xhtml" icon="ui-icon-stop"/>
+				<p:menuitem value="#{msg.equipamentos}"
+					outcome="listarEquipamentos.xhtml" icon="ui-icon-stop"/>
+			</p:submenu>
+
+			<p:menuitem value="#{msg.relatorios}" outcome="home.xhtml"
+				icon="ui-icon-note"/>
+
+			<p:menuitem value="#{msg.usuarios}" outcome="listarUsuarios.xhtml"
+						icon="ui-icon-gear"/>
+				
+			<p:menuitem value="#{msg.logOut}" outcome="../sair.xhtml"
+				icon="ui-icon-power" />
+		</p:menubar>
+	</h:form>
+
+</ui:composition>

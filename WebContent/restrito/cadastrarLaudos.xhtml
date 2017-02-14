@@ -1,0 +1,180 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de Laudos"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{laudoMB.laudo.id}" />
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="Unidade:* " />
+						<p:selectOneMenu id="unidade" value="#{laudoMB.laudo.unidade}"
+							var="unid" required="true"
+							requiredMessage="O campo Unidade é obrigatório!"
+							converter="unidadeConverter" style="width:15.5em" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{unidadeMB.allUnidades}" var="unidade"
+								itemLabel="#{unidade.sigla}" itemValue="#{unidade}" />
+							<p:column style="width:10%">
+								<h:outputText value="#{unid.nome}" />
+							</p:column>
+							<p:column style="width:10%">
+								<h:outputText value="#{unid.sigla}" />
+							</p:column>
+						</p:selectOneMenu>
+
+						<h:outputText value="Setor:* " />
+						<p:selectOneMenu id="setor" value="#{laudoMB.laudo.setor}"
+							required="true" requiredMessage="O campo Setor é obrigatório!"
+							converter="setorConverter" style="width:15.5em" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{setorMB.allSetores}" var="setor"
+								itemLabel="#{setor.nome}" itemValue="#{setor}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Equipamento:* " />
+						<p:selectOneMenu id="equipamento"
+							value="#{laudoMB.laudo.equipamento}" var="equip" required="true"
+							requiredMessage="O campo Equipamento é obrigatório!"
+							converter="equipamentoConverter" style="width:15.5em"
+							filter="true" filterMatchMode="startsWith">
+
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+
+							<f:selectItems value="#{equipamentoMB.allEquipamentos}"
+								var="equipamento" itemLabel="#{equipamento.patrimonio}"
+								itemValue="#{equipamento}" />
+
+							<p:column headerText="Patrimônio">
+								<h:outputText value="Patrimônio" style="font-weight:bold;"
+									rendered="#{equip.id == null}" />
+								<h:outputText value="#{equip.patrimonio}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="Tipo" style="font-weight:bold;"
+									rendered="#{equip.id == null}" />
+								<h:outputText value="#{equip.tipo.tipo}" />
+							</p:column>
+							<p:column headerText="Nº de série">
+								<h:outputText value="Nº de série" style="font-weight:bold;"
+									rendered="#{equip.id == null}" />
+								<h:outputText value="#{equip.serie}" />
+							</p:column>
+							<p:column headerText="Marca">
+								<h:outputText value="Marca" style="font-weight:bold;"
+									rendered="#{equip.id == null}" />
+								<h:outputText value="#{equip.marca}" />
+							</p:column>
+							
+							<p:ajax update="tipo,serie,marca,modelo" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Tipo: " />
+						<p:inputText value="#{laudoMB.laudo.equipamento.tipo.tipo}" id="tipo"
+							required="false" readonly="true" style="background-color: #FFFAFA; width:15.5em"/>
+
+						<h:outputText value="Nº de série: " />
+						<p:inputText value="#{laudoMB.laudo.equipamento.serie}" id="serie"
+							required="false" readonly="true" style="background-color: #FFFAFA; width:15.5em"/>
+
+						<h:outputText value="Marca: " />
+						<p:inputText value="#{laudoMB.laudo.equipamento.marca}" id="marca"
+							required="false" readonly="true" style="background-color: #FFFAFA; width:15.5em"/>
+
+						<h:outputText value="Modelo: " />
+						<p:inputText value="#{laudoMB.laudo.equipamento.modelo}" id="modelo"
+							required="false" readonly="true" style="background-color: #FFFAFA; width:15.5em;"/>
+
+						
+						<h:outputText value="Conclusivo:* " />
+						<p:inputTextarea rows="5" cols="53"
+							value="#{laudoMB.laudo.conclusivo}" required="true"
+							requiredMessage="O campo Conclusivo é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+
+						<h:outputText value="Observações: " />
+						<p:inputTextarea rows="5" cols="53" value="#{laudoMB.laudo.obs}"
+							required="false"
+							requiredMessage="O campo Observações é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+
+						<h:outputText value="Data do laudo: " />
+						<p:calendar id="dt_laudo" pattern="dd/MM/yyyy" locale="pt"
+							value="#{laudoMB.laudo.dt_laudo}" disabled="true" />
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{laudoMB.updateLaudo}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="listarLaudos.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+
+			<script type="text/javascript">
+				PrimeFaces.locales['pt'] = {
+					closeText : 'Fechar',
+					prevText : 'Anterior',
+					nextText : 'Próximo',
+					currentText : 'Começo',
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+					weekHeader : 'Semana',
+					firstDay : 1,
+					isRTL : false,
+					showMonthAfterYear : false,
+					yearSuffix : '',
+					timeOnlyTitle : 'Só Horas',
+					timeText : 'Tempo',
+					hourText : 'Hora',
+					minuteText : 'Minuto',
+					secondText : 'Segundo',
+					currentText : 'Data Atual',
+					ampm : false,
+					month : 'Mês',
+					week : 'Semana',
+					day : 'Dia',
+					allDayText : 'Todo Dia'
+				};
+			</script>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

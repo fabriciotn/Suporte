@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<title>#{msg.tituloPagina}</title>
+	<link rel="icon" href="images/suporte.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/suporte.ico" type="image/x-icon" />
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;">
+		<ui:insert name="menu">
+		</ui:insert>
+
+		<br />
+
+		<ui:insert name="conteudo">
+                Espaço para o conteúdo da tela.
+        </ui:insert>
+
+		<br />
+		<br />
+		<br />
+		<div id="footer"
+			style="text-align: center; background-color: dimgray; font-size: 15px; height: 3em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0;">
+			#{msg.rodapePagina} - #{msg.versao} | <h:outputText value="Usuário: #{userMB.usuarioLogado.name}" rendered="#{userMB.usuarioLogado != null}"/> </div>
+</h:body>
+</html>
