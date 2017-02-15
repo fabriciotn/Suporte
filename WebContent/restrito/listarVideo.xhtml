@@ -23,7 +23,7 @@
 
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="video"
-						value="#{videoMB.allVideos}"
+						value="#{videoMB.allVideosDesc}"
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 						paginator="true" rows="15" style="margin-bottom:20em; font-size:1em" emptyMessage="#{msg.noRecords}">
 
@@ -42,13 +42,13 @@
 						</f:facet>
 
 						<p:column headerText="COD" filterBy="#{video.id}"
-							sortBy="#{video.id}" style="text-align: center; width:6%">
+							sortBy="#{video.id}" style="text-align: center; width:5%">
 							<h:outputText value="#{video.id}" />
 						</p:column>
 						
 						<p:column headerText="SOLICITANTE" filterBy="#{video.nomeSolicitante}"
 							sortBy="#{video.nomeSolicitante}"
-							style="text-align: center; width:10%">
+							style="text-align: center; width:15%">
 							<h:outputText value="#{video.nomeSolicitante}"/><br/>
 							<h:outputText value="#{video.emailSolicitante}"/>
 						</p:column>
@@ -59,13 +59,19 @@
 							<h:outputText value="#{video.setorSolicitante.nome}"/>
 						</p:column>
 						
-						<p:column headerText="ORIGEM" filterBy="#{video.localDeOrigem.nome}"
+						<p:column headerText="LOCAL DE ORIGEM" filterBy="#{video.localDeOrigem.nome}"
 							sortBy="#{video.localDeOrigem.nome}"
 							style="text-align: center; width:10%">
 							<h:outputText value="#{video.localDeOrigem.unidade.sigla} - #{video.localDeOrigem.nome}"/>
 						</p:column>
 						
-						
+						<p:column headerText="LOCAIS DE DESTINO" style="width:13%">
+							<ui:repeat value="#{video.locaisDeDestino}" var="local">
+								<li>
+					            	<h:outputText value="#{local.unidade.sigla} - #{local.nome}" />
+					            </li>
+					        </ui:repeat>
+						</p:column>
 						
 						<p:column headerText="DATA DA VIDEO"
 								filterBy="#{video.dataDaVideo}"
@@ -85,7 +91,7 @@
 						</p:column>
 
 						<p:column exportable="false"
-							style="text-align: center; width:5%;">
+							style="text-align: center; width:4%;">
 							<f:facet name="header">
 								<h:outputText value="Editar" />
 							</f:facet>

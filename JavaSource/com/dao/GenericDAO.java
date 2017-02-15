@@ -170,12 +170,12 @@ abstract class GenericDAO<T> implements Serializable {
 	 * Ordenando de forma descendente, de acordo com o ID
 	 * @return List<T> ListaDeRegistros
 	 */
-	public List<T> findAllDesc() {
+	public List<T> findAllDesc(String parametro) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
 		Root<T> from = criteriaQuery.from(entityClass);
 		CriteriaQuery<T> select = criteriaQuery.select(from);
-		criteriaQuery.orderBy(criteriaBuilder.desc(from.get("id")));
+		criteriaQuery.orderBy(criteriaBuilder.desc(from.get(parametro)));
 		return em.createQuery(select).getResultList();
 	}
 	

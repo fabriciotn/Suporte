@@ -95,7 +95,7 @@ public class EquipamentoFacade implements Serializable {
 	 */
 	public List<Equipamento> listAllDesc() {
 		equipamentoDAO.beginTransaction();
-		List<Equipamento> result = equipamentoDAO.findAllDesc();
+		List<Equipamento> result = equipamentoDAO.findAllDesc("id");
 		equipamentoDAO.closeTransaction();
 		return result;
 	}

@@ -97,7 +97,7 @@ public class VideoFacade implements Serializable {
 	 */
 	public List<Video> listAllDesc() {
 		videoDAO.beginTransaction();
-		List<Video> result = videoDAO.findAllDesc();
+		List<Video> result = videoDAO.findAllDesc("dataDaVideo");
 		videoDAO.closeTransaction();
 		return result;
 	}

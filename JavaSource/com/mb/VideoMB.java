@@ -121,6 +121,14 @@ public class VideoMB extends AbstractMB implements Serializable {
 
 		return videos;
 	}
+	
+	public List<Video> getAllVideosDesc() {
+		if (videos == null) {
+			videos = getVideoFacade().listAllDesc();
+		}
+
+		return videos;
+	}
 
 	private void loadVideos() {
 		videos = getVideoFacade().listAll();

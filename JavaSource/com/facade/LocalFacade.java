@@ -88,7 +88,7 @@ public class LocalFacade implements Serializable {
 	 */
 	public List<Local> listAllDesc() {
 		localDAO.beginTransaction();
-		List<Local> result = localDAO.findAllDesc();
+		List<Local> result = localDAO.findAllDesc("id");
 		localDAO.closeTransaction();
 		return result;
 	}

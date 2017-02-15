@@ -84,7 +84,7 @@ public class LaudoFacade implements Serializable {
 	 */
 	public List<Laudo> listAllDesc() {
 		laudoDAO.beginTransaction();
-		List<Laudo> result = laudoDAO.findAllDesc();
+		List<Laudo> result = laudoDAO.findAllDesc("id");
 		laudoDAO.closeTransaction();
 		return result;
 	}
