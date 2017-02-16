@@ -1,6 +1,7 @@
 package com.facade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -57,6 +58,7 @@ public class VideoFacade implements Serializable {
 			persistedVideo.setSenhaDaSala(video.getSenhaDaSala());
 			persistedVideo.setLocalDeOrigem(video.getLocalDeOrigem());
 			persistedVideo.setLocaisDeDestino(video.getLocaisDeDestino());
+			persistedVideo.setDataDeRegistro(new Date());
 		} else {
 			persistedVideo = video;
 		}
