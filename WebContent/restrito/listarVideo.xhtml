@@ -46,17 +46,12 @@
 							<h:outputText value="#{video.id}" />
 						</p:column>
 						
-						<p:column headerText="SOLICITANTE" filterBy="#{video.nomeSolicitante}"
-							sortBy="#{video.nomeSolicitante}"
-							style="text-align: center; width:15%">
-							<h:outputText value="#{video.nomeSolicitante}"/><br/>
-							<h:outputText value="#{video.emailSolicitante}"/>
-						</p:column>
-						
-						<p:column headerText="SETOR" filterBy="#{video.setorSolicitante.nome}"
+						<p:column headerText="SOLICITANTE" filterBy="#{video.setorSolicitante.nome}"
 							sortBy="#{video.setorSolicitante.nome}"
-							style="text-align: center; width:10%">
-							<h:outputText value="#{video.setorSolicitante.nome}"/>
+							style="width:15%" >
+							<h:outputText value="Setor: " style="font-weight: bold;"/><h:outputText value="#{video.setorSolicitante.nome}"/><br/>
+							<h:outputText value="Nome: " style="font-weight: bold;" /><h:outputText value="#{video.nomeSolicitante}"/><br/>
+							<h:outputText value="E-mail: " style="font-weight: bold;" /><h:outputText value="#{video.emailSolicitante}"/>
 						</p:column>
 						
 						<p:column headerText="LOCAL DE ORIGEM" filterBy="#{video.localDeOrigem.nome}"
