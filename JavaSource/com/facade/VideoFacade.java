@@ -131,4 +131,25 @@ public class VideoFacade implements Serializable {
 		return list;
 	}
 
+	
+	/*
+	 * EM DESENVOLVIMENTO.....
+	 *
+	public boolean validaSeJaExisteVideoParaMesmoDiaEHoraio(){
+		String sql = "select " + 
+				" v.id, " + 
+				" v.dataDaVideo, " + 
+			    " v.horaDeInicioDaVideo, " + 
+			    " v.horaDeFimDaVideo, " + 
+				" v.localDeOrigem, " + 
+			    " v.locaisDeDestino " + 
+			" from  " + 
+				" Video v ";
+		List<Object[]> buscaComQuery = buscaComQuery(sql);
+		for (Object[] o : buscaComQuery) {
+			System.out.println("Teste: " + o);
+		}
+		return true;
+	}
+	*/
 }
