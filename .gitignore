@@ -43,8 +43,6 @@ Desktop.ini
 ######################
  
 *.pydevproject
-.metadata
-.project
 bin/**
 tmp/**
 tmp/**/*
@@ -53,7 +51,7 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
-.classpath
+
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
